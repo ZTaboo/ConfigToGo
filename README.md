@@ -6,5 +6,5 @@
 [点击下载](https://github.com/ZTaboo/ConfigToGo/releases)
 
 ### 预览
-![img1.png](doc/images/img1.png)
+![img1.png](doc/images/img1-fix.png)
 ![img2.png](doc/images/img2.png)

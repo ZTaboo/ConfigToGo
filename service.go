@@ -225,15 +225,6 @@ func rangeMap(data any, structName string, listData *[]model.ResData, cont int, 
 		Name: strings.ToTitle(structName[:1]) + structName[1:],
 	})
 	var paramData []model.Param
-	switch data.(type) {
-	case interface{}:
-		break
-	case map[string]interface{}:
-		break
-	default:
-
-		break
-	}
 	for k, v := range data.(map[string]interface{}) {
 		switch v.(type) {
 		case map[string]interface{}:
@@ -273,7 +264,7 @@ func rangeMap(data any, structName string, listData *[]model.ResData, cont int, 
 					tmpData := utils.Case(k)
 					paramData = append(paramData, model.Param{
 						Name:    tmpData,
-						Type:    "[]" + reflect.TypeOf(v.([]interface{})[0]).String(),
+						Type:    "[]" + utils.GetType(v.([]interface{})[0]),
 						Tag:     strings.ToLower(tmpData[:1]) + tmpData[1:],
 						TagType: name,
 					})
@@ -301,7 +292,7 @@ func rangeMap(data any, structName string, listData *[]model.ResData, cont int, 
 				tmpData := utils.Case(k)
 				paramData = append(paramData, model.Param{
 					Name:    tmpData,
-					Type:    reflect.TypeOf(v).String(),
+					Type:    utils.GetType(v),
 					Tag:     strings.ToLower(tmpData[:1]) + tmpData[1:],
 					TagType: name,
 				})

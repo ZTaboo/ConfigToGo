@@ -1,0 +1,11 @@
+{{- define "language" -}}
+package model
+
+{{- range $index,$v := . }}
+type {{$v.Name}} struct {
+{{- range $i,$x := $v.Param}}
+    {{$x.Name}} {{$x.Type}} `{{$x.TagType}}:"{{$x.Tag}}"`
+{{- end}}
+}
+{{ end }}
+{{- end -}}

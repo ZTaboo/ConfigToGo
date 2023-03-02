@@ -8,15 +8,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/spf13/viper"
-	"gopkg.in/yaml.v3"
 	"os"
 	"os/exec"
 	"reflect"
 	"runtime"
 	"strings"
-	"syscall"
 	"text/template"
+
+	"github.com/spf13/viper"
+	"gopkg.in/yaml.v3"
 )
 
 //go:embed all:template
@@ -88,9 +88,7 @@ func JsonToStruct(jsonData string, name string) (string, error) {
 func printOutStr(data string) string {
 	fmtPath := runtime.GOROOT() + "/bin/gofmt"
 	cmd := exec.Command(fmtPath, data)
-	if runtime.GOOS == "windows" {
-		cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-	}
+
 	output, err := cmd.Output()
 	if err != nil {
 		fmt.Println("error:", err)
@@ -270,9 +268,7 @@ func rangeMap(data any, structName string, listData *[]model.ResData, cont int, 
 					})
 				}
 				break
-
 			}
-
 			break
 		case []map[string]interface{}:
 			fmt.Println("数组对象参数")
@@ -317,9 +313,7 @@ func isMap(data any) (any, error) {
 		default:
 			return nil, errors.New("类型错误")
 		}
-		break
 	default:
 		return nil, errors.New("类型错误")
 	}
-	return nil, errors.New("类型错误")
 }
